@@ -22,9 +22,15 @@ app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 // Set up CORS headers
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', 'https://university-frontend-rosy.vercel.app');
-    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS'); // Include OPTIONS method
     res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-    next();
+
+    // Handle preflight requests
+    if (req.method === 'OPTIONS') {
+        res.sendStatus(200);
+    } else {
+        next();
+    }
 });
 
 app.use(routes);
