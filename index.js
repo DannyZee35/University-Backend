@@ -7,14 +7,15 @@ const routes = require('./routes/authRoutes');
 const courseRoutes = require('./routes/courseRoutes');
 const fileUpload = require('express-fileupload')
 connectDB();
-const app = express();
 const cors = require('cors');
+const app = express();
 
+ 
+app.use(cors());
 app.use(fileUpload({
     useTempFiles: true
 }))
- 
-app.use(cors());
+
 
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
